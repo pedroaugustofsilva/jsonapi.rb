@@ -44,7 +44,7 @@ module JSONAPI
 
         return JSONAPI::Rails.serializer_to_json(
           JSONAPI::ErrorSerializer.new(resource, options)
-        ) unless resource.is_a?(ActiveModel::Errors)
+        ) if resource.is_a?(ActiveModel::Errors) || resource.is_a?(Array) || resource.is_a?(Hash)
 
         errors = []
         model = resource.instance_variable_get('@base')
